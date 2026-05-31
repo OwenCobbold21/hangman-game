@@ -3,7 +3,7 @@ session_start();
 
 $username = $_POST['username'] ?? '';
 $errors = [];
-$errorMessage = '';
+$errorMessage = ''; // initialize errormessage
 
 if (isset($_POST['submit'])) {
 
@@ -29,7 +29,6 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +46,7 @@ if (isset($_POST['submit'])) {
             <div class="form-item">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username"
-                    value="<?php echo htmlspecialchars($username); ?>">
+                    value="<?php echo htmlspecialchars($username); ?>"> 
                 <span class="error <?php echo !isset($errors['username']) ? 'hidden' : ''; ?>">
                     <?php echo $errorMessage; ?>
                 </span>

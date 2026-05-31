@@ -53,7 +53,6 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,17 +75,17 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-item row">
                 <input type="radio" id="easy" name="difficulty" value="Easy"
-                    <?php echo ($difficulty === 'Easy') ? 'checked' : ''; ?> >
+                    <?php echo ($difficulty === 'Easy') ? 'checked' : ''; ?>>
                 <label for="easy">Easy (3-5 letter words)</label>
             </div>
             <div class="form-item row">
                 <input type="radio" id="medium" name="difficulty" value="Medium"
-                    <?php echo ($difficulty === 'Medium') ? 'checked' : ''; ?> >
+                    <?php echo ($difficulty === 'Medium') ? 'checked' : ''; ?>>
                 <label for="medium">Medium (6-8 letter words)</label>
             </div>
             <div class="form-item row">
                 <input type="radio" id="hard" name="difficulty" value="Hard"
-                    <?php echo ($difficulty === 'Hard') ? 'checked' : ''; ?> >
+                    <?php echo ($difficulty === 'Hard') ? 'checked' : ''; ?>>
                 <label for="hard">Hard (9+ letter words)</label>
             </div>
             <button type="submit" name="submit">Start Game</button>

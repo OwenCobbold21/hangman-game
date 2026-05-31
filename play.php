@@ -28,7 +28,7 @@ foreach (str_split($word) as $letter) {
     }
 }
 
-// check if word is fully revealed
+// check if word is fully revealed or not
 $wordGuessed = !in_array('_', $wordDisplay);
 
 if (isset($_POST['submit'])) {
@@ -47,11 +47,10 @@ if (isset($_POST['submit'])) {
         if (strlen($guess) > 1) {
             if ($guess === $word) {
                 // correct word guess - reveal all letters
-                $_SESSION['guessed_letters'] = str_split($word);
-                $_SESSION['remaining_guesses'] = $remainingGuesses;
+                $_SESSION['guessed_letters'] = str_split($word); // fixed  logic to increment full word guesses down only 1 instead of 2
             } else {
-                // wrong word guess - minus 2 guesses
-                $_SESSION['remaining_guesses'] -= 2;
+                // wrong word guess - minus 1 guesses
+                $_SESSION['remaining_guesses'] -= 1;
             }
         } else {
             // single letter
@@ -63,6 +62,7 @@ if (isset($_POST['submit'])) {
             }
         }
 
+        // I think my code couldve been better here  but I don't wanna touch it now that its all working properly
         // redirect to refresh page with the updated session
         header("Location: play.php");
         exit;
@@ -125,12 +125,14 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman - Play</title>
     <link rel="stylesheet" href="./styles/main.css">
 </head>
+
 <body>
     <header>
         <h1>Hangman</h1>
@@ -191,4 +193,5 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
         <p>&copy; Owen Cobbold 2026</p>
     </footer>
 </body>
+
 </html>

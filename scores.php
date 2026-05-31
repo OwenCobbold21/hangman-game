@@ -42,33 +42,120 @@ $hardScores->execute();
 $hardResults = $hardScores->fetchAll();
 ?>
 
+
 <!DOCTYPE html>
-<h lang="en">
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hangman - Scores</title>
-        <link rel="stylesheet" href="./styles/main.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman - Scores</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
 
-    <body>
-        <header>
-            <h1>Hangman</h1>
-        </header>
-        <main>
-            <h2>Score Tables</h2>
+<body>
+    <header>
+        <h1>Hangman</h1>
+    </header>
+    <main>
+        <h2>Score Tables</h2>
 
-            <h3>Easy</h3>
-            <table>
-                <thead>
+        <h3>Easy</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Result</th>
+                    <th>Word</th>
+                    <th>Score</th>
+                    <th>Date Played</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($easyResults)): ?>
                     <tr>
-                        <th>Username</th>
-
+                        <td colspan="5">No scores yet.</td>
                     </tr>
+                <?php else: ?>
+                    <?php foreach ($easyResults as $row): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td><?php echo $row['result']; ?></td>
+                            <td><?php echo $row['word']; ?></td>
+                            <td><?php echo $row['score']; ?></td>
+                            <td><?php echo $row['play_date']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
+        <h3>Medium</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Result</th>
+                    <th>Word</th>
+                    <th>Score</th>
+                    <th>Date Played</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($mediumResults)): ?>
+                    <tr>
+                        <td colspan="5">No scores yet.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($mediumResults as $row): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td><?php echo $row['result']; ?></td>
+                            <td><?php echo $row['word']; ?></td>
+                            <td><?php echo $row['score']; ?></td>
+                            <td><?php echo $row['play_date']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
+        <h3>Hard</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Result</th>
+                    <th>Word</th>
+                    <th>Score</th>
+                    <th>Date Played</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($hardResults)): ?>
+                    <tr>
+                        <td colspan="5">No scores yet.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($hardResults as $row): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td><?php echo $row['result']; ?></td>
+                            <td><?php echo $row['word']; ?></td>
+                            <td><?php echo $row['score']; ?></td>
+                            <td><?php echo $row['play_date']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
-    </body>
+        <a href="difficulty.php">Play Again</a>
+
+    </main>
+    <footer>
+        <p>&copy; Owen Cobbold 2026</p>
+    </footer>
+</body>
 
 </html>
