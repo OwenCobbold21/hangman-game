@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['word'] = strtoupper($result['word']);
         $_SESSION['difficulty'] = $difficulty;
         $_SESSION['guessed_letters'] = [];
-        $_SESSION['remaining_guesses'] = 6;
+        $_SESSION['remaining_guesses'] = 8;
 
         header("Location: play.php");
         exit;

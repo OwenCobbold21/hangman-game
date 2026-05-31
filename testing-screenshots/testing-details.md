@@ -66,13 +66,21 @@ Loki Link: [play.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-O
 
 ![Wrong letter guess](wrong_letter.png)
 
+### 
+![Repeated letter guess](repeated_letter.png)
+
 ### Win Screen
 
 ![Win screen](win_screen.png)
+![Win Screen 2](win_screen_hardmode.png)
 
 ### Game Over Screen
 
 ![Game over screen](game_over.png)
+
+### Play Again
+
+![Play Again sends the same user to difficulty page]()
 
 ### HTML Validation
 
@@ -81,4 +89,7 @@ Loki Link: [play.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-O
 ## scores.php
 
 Loki Link: [scores.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-OwenCobbold21/scores.php)
+
+### 
+
 
