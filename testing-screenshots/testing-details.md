@@ -52,27 +52,27 @@ Loki Link: [play.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-O
 
 ### Empty Guess Error
 
-![Empty guess error](empty-guess.png)
+![Empty guess error](empty_guess.png)
 
 ### Invalid Guess Error
 
-![Invalid guess error](invalid-guess.png)
+![Invalid guess error](invalid_guess.png)
 
 ### Correct Letter Guess
 
-![Correct letter guess](correct-letter.png)
+![Correct letter guess](correct_letter.png)
 
 ### Wrong Letter Guess
 
-![Wrong letter guess](wrong-letter.png)
+![Wrong letter guess](wrong_letter.png)
 
 ### Win Screen
 
-![Win screen](win-screen.png)
+![Win screen](win_screen.png)
 
 ### Game Over Screen
 
-![Game over screen](game-over.png)
+![Game over screen](game_over.png)
 
 ### HTML Validation
 

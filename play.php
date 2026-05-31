@@ -34,13 +34,13 @@ $wordGuessed = !in_array('_', $wordDisplay);
 if (isset($_POST['submit'])) {
     $guess = strtoupper(trim($_POST['guess'] ?? ''));
 
-    // validation
+    // validation using regular expression 
     if (empty($guess)) {
         $errors['guess'] = "Please enter a guess.";
     } elseif (!preg_match('/^[A-Z]+$/', $guess)) {
-        $errors['guess'] = "Your guess can only contain letters.";
-    } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) { // ** important to TEST
-        $errors['guess'] = "You already guessed that letter.";
+        $errors['guess'] = "Your guess can only contain letters."; // check for non-apporpriate characters
+    } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) {
+        $errors['guess'] = "You already guessed that letter."; // make sure no reguessing is possible
     } else {
 
         // full word guess
@@ -54,11 +54,11 @@ if (isset($_POST['submit'])) {
                 $_SESSION['remaining_guesses'] -= 2;
             }
         } else {
-            // single letter 
+            // single letter
             $_SESSION['guessed_letters'][] = $guess;
 
             if (!str_contains($word, $guess)) {
-                // wrong letter - increment down 1 of the remianing guesses
+                // wrong letter - decrement remaining guesses by 1
                 $_SESSION['remaining_guesses'] -= 1;
             }
         }
@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
-    // update  variables  after validation
+    // update variables after validation
     $guessedLetters = $_SESSION['guessed_letters'];
     $remainingGuesses = $_SESSION['remaining_guesses'];
 
@@ -88,17 +88,19 @@ if (isset($_POST['submit'])) {
 
 $gameOver = false;
 $gameWon = false;
+$score = 0;
+$result = '';
 
-if ($wordGuessed || $remainingGuesses <= 0) {
+if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
     $gameOver = true;
-    $gameWon = $wordGuessed;
+    $gameWon = $wordGuessed; // game winning logic
 
-    // calculate score
+    // calculate the score
     $lettersRevealed = count(array_filter($wordDisplay, fn($l) => $l !== '_'));
     $score = ($lettersRevealed * 5) + ($remainingGuesses * 10) + ($gameWon ? 15 : 0);
     $result = $gameWon ? 'Win' : 'Lose';
 
-    // this block should only insert the score if it has nor already been inserte 
+    // only insert score if not already inserted
     if (!isset($_SESSION['score_inserted'])) {
         require_once './includes/library.php';
         $pdo = connectdb();
@@ -119,57 +121,74 @@ if ($wordGuessed || $remainingGuesses <= 0) {
         $_SESSION['score_inserted'] = true;
     }
 }
-
 ?>
-<main>
-    <div id="game-info">
-        <p>Player: <strong><?php echo htmlspecialchars($username); ?></strong></p>
-        <p>Difficulty: <strong><?php echo $difficulty; ?></strong></p>
-        <p>Remaining Guesses: <strong><?php echo $remainingGuesses; ?></strong></p>
-    </div>
 
-    <div id="word-display">
-        <?php foreach ($wordDisplay as $letter): ?>
-            <span class="letter"><?php echo $letter; ?></span>
-        <?php endforeach; ?>
-    </div>
-
-    <div id="guessed-letters">
-        <p>Guessed Letters:
-            <strong>
-                <?php echo !empty($guessedLetters) ? implode(', ', $guessedLetters) : 'None yet'; ?>
-            </strong>
-        </p>
-    </div>
-
-    <?php if ($gameOver): ?>
-        <?php if ($gameWon): ?>
-            <h2>You Win!</h2>
-            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
-        <?php else: ?>
-            <h2>Game Over!</h2>
-            <p>The word was: <strong><?php echo $word; ?></strong></p>
-            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
-        <?php endif; ?>
-
-        <div id="game-over-options">
-            <a href="difficulty.php">Play Again</a> 
-            <a href="scores.php">See Other Scores</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman - Play</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Hangman</h1>
+    </header>
+    <main>
+        <div id="game-info">
+            <p>Player: <strong><?php echo htmlspecialchars($username); ?></strong></p>
+            <p>Difficulty: <strong><?php echo $difficulty; ?></strong></p>
+            <p>Remaining Guesses: <strong><?php echo $remainingGuesses; ?></strong></p>
         </div>
 
-    <?php else: ?>
-        <form method="post" novalidate>
-            <div class="form-item">
-                <span class="error <?php echo isset($errors['guess']) ? '' : 'hidden'; ?>">
-                    <?php echo $errors['guess'] ?? ''; ?>
-                </span>
-            </div>
-            <div class="form-item">
-                <label for="guess">Guess a letter or the whole word:</label>
-                <input type="text" id="guess" name="guess" maxlength="50">
-            </div>
-            <button type="submit" name="submit">Guess</button>
-        </form>
-    <?php endif; ?>
+        <div id="word-display">
+            <?php foreach ($wordDisplay as $letter): ?>
+                <span class="letter"><?php echo $letter; ?></span>
+            <?php endforeach; ?>
+        </div>
 
-</main>
+        <div id="guessed-letters">
+            <p>Guessed Letters:
+                <strong>
+                    <?php echo !empty($guessedLetters) ? implode(', ', $guessedLetters) : 'None yet'; ?>
+                </strong>
+            </p>
+        </div>
+
+        <?php if ($gameOver): ?>
+            <?php if ($gameWon): ?>
+                <h2>You Win!</h2>
+                <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+            <?php else: ?>
+                <h2>Game Over!</h2>
+                <p>The word was: <strong><?php echo $word; ?></strong></p>
+                <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+            <?php endif; ?>
+
+            <div id="game-over-options">
+                <a href="difficulty.php">Play Again</a>
+                <a href="scores.php">See Other Scores</a>
+            </div>
+
+        <?php else: ?>
+            <form method="post" novalidate>
+                <div class="form-item">
+                    <span class="error <?php echo isset($errors['guess']) ? '' : 'hidden'; ?>">
+                        <?php echo $errors['guess'] ?? ''; ?>
+                    </span>
+                </div>
+                <div class="form-item">
+                    <label for="guess">Guess a letter or the whole word:</label>
+                    <input type="text" id="guess" name="guess" maxlength="50">
+                </div>
+                <button type="submit" name="submit">Guess</button>
+            </form>
+        <?php endif; ?>
+
+    </main>
+    <footer>
+        <p>&copy; Owen Cobbold 2026</p>
+    </footer>
+</body>
+</html>

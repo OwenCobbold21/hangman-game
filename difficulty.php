@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// clear game session data when starting a new game
+unset($_SESSION['word']);
+unset($_SESSION['difficulty']);
+unset($_SESSION['guessed_letters']);
+unset($_SESSION['remaining_guesses']);
+unset($_SESSION['score_inserted']); // fix play again problems
+
 // if no username in session send them back to start
 if (!isset($_SESSION['username'])) {
     header("Location: start.php");
