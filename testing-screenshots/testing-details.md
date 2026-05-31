@@ -16,7 +16,7 @@ Loki Link: [start.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-
 
 ### Successful Redirect
 
-![Successful redirect](valid-username.png)
+![Successful redirect](valid_username.png)
 
 ### HTML start Validation
 
