@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         $errors['guess'] = "Please enter a guess.";
     } elseif (!preg_match('/^[A-Z]+$/', $guess)) {
         $errors['guess'] = "Your guess can only contain letters.";
-    } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) {
+    } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) { // ** important to TEST
         $errors['guess'] = "You already guessed that letter.";
     } else {
 
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['guessed_letters'][] = $guess;
 
             if (!str_contains($word, $guess)) {
-                // wrong letter - minus 1 guess
+                // wrong letter - increment down 1 of the remianing guesses
                 $_SESSION['remaining_guesses'] -= 1;
             }
         }
@@ -68,60 +68,85 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
-//     // update  variables  after validation
-//     $guessedLetters = $_SESSION['guessed_letters'];
-//     $remainingGuesses = $_SESSION['remaining_guesses'];
+    // update  variables  after validation
+    $guessedLetters = $_SESSION['guessed_letters'];
+    $remainingGuesses = $_SESSION['remaining_guesses'];
 
-//     // rebuild word display after guess
-//     $wordDisplay = []
-//     $lettersRevealed = 0;
-//     foreach (str_split($word) as $letter) {
-//         if (in_array($letter, $guessedLetters)) {
-//    
+    // rebuild word display after guess
+    $wordDisplay = [];
+    $lettersRevealed = 0;
+    foreach (str_split($word) as $letter) {
+        if (in_array($letter, $guessedLetters)) {
+            $wordDisplay[] = $letter;
+            $lettersRevealed++;
+        } else {
+            $wordDisplay[] = '_';
+        }
+    }
+    $wordGuessed = !in_array('_', $wordDisplay);
+}
 
-//  logic that detects win/loss and scores properly
+$gameOver = false;
+$gameWon = false;
+
+if ($wordGuessed || $remainingGuesses <= 0) {
+    $gameOver = true;
+    $gameWon = $wordGuessed;
+
+    // calculate score
+    $lettersRevealed = count(array_filter($wordDisplay, fn($l) => $l !== '_'));
+    $score = ($lettersRevealed * 5) + ($remainingGuesses * 10) + ($gameWon ? 15 : 0);
+    $result = $gameWon ? 'Win' : 'Lose';
+
+    // this block should only insert the score if it has nor already been inserte 
+}
 
 
 
-// show win  or loss on UI
 
 ?>
+<main>
+    <div id="game-info">
+        <p>Player: <strong><?php echo htmlspecialchars($username); ?></strong></p>
+        <p>Difficulty: <strong><?php echo $difficulty; ?></strong></p>
+        <p>Remaining Guesses: <strong><?php echo $remainingGuesses; ?></strong></p>
+    </div>
 
-<!DOCTYPE html>
-<html lang="en">
+    <div id="word-display">
+        <?php foreach ($wordDisplay as $letter): ?>
+            <span class="letter"><?php echo $letter; ?></span>
+        <?php endforeach; ?>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman - Play</title>
-    <link rel="stylesheet" href="./styles/main.css">
-</head>
+    <div id="guessed-letters">
+        <p>Guessed Letters:
+            <strong>
+                <?php echo !empty($guessedLetters) ? implode(', ', $guessedLetters) : 'None yet'; ?>
+            </strong>
+        </p>
+    </div>
 
-<body>
-    <header>
-        <h1>Hangman</h1>
-    </header>
-    <main>
-        <div id="game-info">
-            <p>Player: <strong><?php echo htmlspecialchars($username); ?></strong></p>
-            <p>Difficulty: <strong><?php echo $difficulty; ?></strong></p>
-            <p>Remaining Guesses: <strong><?php echo $remainingGuesses; ?></strong></p>
+    <?php if ($gameOver): ?>
+        <?php if ($gameWon): ?>
+            <h2>You Win!</h2>
+            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+        <?php else: ?>
+            <h2>Game Over!</h2>
+            <p>The word was: <strong><?php echo $word; ?></strong></p>
+            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+        <?php endif; ?>
+
+        <div id="game-over-options">
+            <a href="difficulty.php" onclick="<?php
+                // clear game session on play again
+                session_unset();
+                session_start();
+                $_SESSION['username'] = $username;
+            ?>">Play Again</a>
+            <a href="scores.php">See Other Scores</a>
         </div>
 
-        <div id="word-display">
-            <?php foreach ($wordDisplay as $letter): ?>
-                <span class="letter"><?php echo $letter; ?></span>
-            <?php endforeach; ?>
-        </div>
-
-        <div id="guessed-letters">
-            <p>Guessed Letters:
-                <strong>
-                    <?php echo !empty($guessedLetters) ? implode(', ', $guessedLetters) : 'None yet'; ?>
-                </strong>
-            </p>
-        </div>
-
+    <?php else: ?>
         <form method="post" novalidate>
             <div class="form-item">
                 <span class="error <?php echo isset($errors['guess']) ? '' : 'hidden'; ?>">
@@ -130,14 +155,10 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-item">
                 <label for="guess">Guess a letter or the whole word:</label>
-                <input type="text" id="guess" name="guess" maxlength="50" />
+                <input type="text" id="guess" name="guess" maxlength="50">
             </div>
             <button type="submit" name="submit">Guess</button>
         </form>
-    </main>
-    <footer>
-        <p>&copy; Owen Cobbold 2026</p>
-    </footer>
-</body>
+    <?php endif; ?>
 
-</html>
+</main>
