@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// if no username is in the session this should send them back to the start
+// if no username in session send them back to start
 if (!isset($_SESSION['username'])) {
     header("Location: start.php");
     exit;
@@ -16,15 +16,32 @@ if (isset($_POST['submit'])) {
     if (empty($difficulty)) {
         $errors['difficulty'] = true;
     }
+
+    if (empty($errors)) {
+        // include library and connect to database
+        require_once './includes/library.php';
+        $pdo = connectdb();
+
+        // get random word at selected difficulty from the database I created
+        $stmt = $pdo->prepare("
+            SELECT word FROM cois3430_assn1_words
+            WHERE difficulty = :difficulty
+            ORDER BY RAND()
+            LIMIT 1
+        ");
+        $stmt->execute([':difficulty' => $difficulty]);
+        $result = $stmt->fetch();
+
+        // store game data in the session
+        $_SESSION['word'] = strtoupper($result['word']);
+        $_SESSION['difficulty'] = $difficulty;
+        $_SESSION['guessed_letters'] = [];
+        $_SESSION['remaining_guesses'] = 6;
+
+        header("Location: play.php");
+        exit;
+    }
 }
-
-// 
-
-
-//
-
-?>
-
 ?>
 
 <!DOCTYPE html>
