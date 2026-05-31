@@ -3,18 +3,25 @@ session_start();
 
 $username = $_POST['username'] ?? '';
 $errors = [];
+$errorMessage = '';
 
 if (isset($_POST['submit'])) {
 
-    // validate that the username isn't empty
+    // check if empty
     if (empty($username)) {
         $errors['username'] = true;
+        $errorMessage = "Please enter a username.";
+
+    // check if username valid characters, only letters, numbers, underscores
+    } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+        $errors['username'] = true;
+        $errorMessage = "Username can only contain letters, numbers, and underscores.";
     }
 
-    // if no errors then store in session and redirect to the game
+    // if no errors store in session and redirect
     if (empty($errors)) {
         $_SESSION['username'] = $username;
-        header("Location: game.php");
+        header("Location: difficulty.php");
         exit;
     }
 }
@@ -38,13 +45,16 @@ if (isset($_POST['submit'])) {
             <div class="form-item">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username"
-                    value="<?php echo htmlspecialchars($username); ?>" />
+                    value="<?php echo htmlspecialchars($username); ?>" >
                 <span class="error <?php echo !isset($errors['username']) ? 'hidden' : ''; ?>">
-                    Please enter a username to continue.
+                    <?php echo $errorMessage; ?>
                 </span>
             </div>
             <button type="submit" name="submit">Start Game</button>
         </form>
     </main>
+    <footer>
+        <p>&copy; Owen Cobbold 2026</p>
+    </footer>
 </body>
 </html>
