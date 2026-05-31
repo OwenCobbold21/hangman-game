@@ -31,6 +31,60 @@ foreach (str_split($word) as $letter) {
 // check if word is fully revealed
 $wordGuessed = !in_array('_', $wordDisplay);
 
+if (isset($_POST['submit'])) {
+    $guess = strtoupper(trim($_POST['guess'] ?? ''));
+
+    // validation
+    if (empty($guess)) {
+        $errors['guess'] = "Please enter a guess.";
+    } elseif (!preg_match('/^[A-Z]+$/', $guess)) {
+        $errors['guess'] = "Your guess can only contain letters.";
+    } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) {
+        $errors['guess'] = "You already guessed that letter.";
+    } else {
+
+        // full word guess
+        if (strlen($guess) > 1) {
+            if ($guess === $word) {
+                // correct word guess - reveal all letters
+                $_SESSION['guessed_letters'] = str_split($word);
+                $_SESSION['remaining_guesses'] = $remainingGuesses;
+            } else {
+                // wrong word guess - minus 2 guesses
+                $_SESSION['remaining_guesses'] -= 2;
+            }
+        } else {
+            // single letter 
+            $_SESSION['guessed_letters'][] = $guess;
+
+            if (!str_contains($word, $guess)) {
+                // wrong letter - minus 1 guess
+                $_SESSION['remaining_guesses'] -= 1;
+            }
+        }
+
+        // redirect to refresh page with the updated session
+        header("Location: play.php");
+        exit;
+    }
+
+//     // update  variables  after validation
+//     $guessedLetters = $_SESSION['guessed_letters'];
+//     $remainingGuesses = $_SESSION['remaining_guesses'];
+
+//     // rebuild word display after guess
+//     $wordDisplay = []
+//     $lettersRevealed = 0;
+//     foreach (str_split($word) as $letter) {
+//         if (in_array($letter, $guessedLetters)) {
+//    
+
+//  logic that detects win/loss and scores properly
+
+
+
+// show win  or loss on UI
+
 ?>
 
 <!DOCTYPE html>
