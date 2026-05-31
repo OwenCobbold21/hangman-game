@@ -19,6 +19,7 @@ $errors = [];
 $wordDisplay = [];
 $lettersRevealed = 0;
 
+
 foreach (str_split($word) as $letter) {
     if (in_array($letter, $guessedLetters)) {
         $wordDisplay[] = $letter;
