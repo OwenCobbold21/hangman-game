@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $errors['username'] = true;
         $errorMessage = "Please enter a username.";
 
-    // check if username valid characters, only letters, numbers, underscores
+        // check if username valid characters, only letters, numbers, underscores
     } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
         $errors['username'] = true;
         $errorMessage = "Username can only contain letters, numbers, and underscores.";
@@ -29,12 +29,14 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman - Enter Username</title>
     <link rel="stylesheet" href="./styles/main.css">
 </head>
+
 <body>
     <header>
         <h1>Hangman</h1>
@@ -45,7 +47,7 @@ if (isset($_POST['submit'])) {
             <div class="form-item">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username"
-                    value="<?php echo htmlspecialchars($username); ?>" >
+                    value="<?php echo htmlspecialchars($username); ?>">
                 <span class="error <?php echo !isset($errors['username']) ? 'hidden' : ''; ?>">
                     <?php echo $errorMessage; ?>
                 </span>
@@ -57,4 +59,5 @@ if (isset($_POST['submit'])) {
         <p>&copy; Owen Cobbold 2026</p>
     </footer>
 </body>
+
 </html>

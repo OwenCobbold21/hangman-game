@@ -46,12 +46,14 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman - Select Difficulty</title>
     <link rel="stylesheet" href="./styles/main.css">
 </head>
+
 <body>
     <header>
         <h1>Hangman</h1>
@@ -61,30 +63,31 @@ if (isset($_POST['submit'])) {
         <h2>Select Difficulty</h2>
         <form method="post" novalidate>
             <div class="form-item">
-                <span class="error <?php echo !isset($errors['difficulty']) ? 'hidden' : ''; ?>">
+                <span class="error <?php echo !empty($errors) && isset($errors['difficulty']) ? '' : 'hidden'; ?>">
                     Please select a difficulty level.
                 </span>
             </div>
             <div class="form-item row">
                 <input type="radio" id="easy" name="difficulty" value="Easy"
-                    <?php echo ($difficulty === 'Easy') ? 'checked' : ''; ?> />
+                    <?php echo ($difficulty === 'Easy') ? 'checked' : ''; ?> >
                 <label for="easy">Easy (3-5 letter words)</label>
             </div>
             <div class="form-item row">
                 <input type="radio" id="medium" name="difficulty" value="Medium"
-                    <?php echo ($difficulty === 'Medium') ? 'checked' : ''; ?> />
+                    <?php echo ($difficulty === 'Medium') ? 'checked' : ''; ?> >
                 <label for="medium">Medium (6-8 letter words)</label>
             </div>
             <div class="form-item row">
                 <input type="radio" id="hard" name="difficulty" value="Hard"
-                    <?php echo ($difficulty === 'Hard') ? 'checked' : ''; ?> />
+                    <?php echo ($difficulty === 'Hard') ? 'checked' : ''; ?> >
                 <label for="hard">Hard (9+ letter words)</label>
             </div>
             <button type="submit" name="submit">Start Game</button>
         </form>
     </main>
     <footer>
-        <p>&copy; Owen Cobbold 2024</p>
+        <p>&copy; Owen Cobbold 2026</p>
     </footer>
 </body>
+
 </html>
