@@ -99,10 +99,26 @@ if ($wordGuessed || $remainingGuesses <= 0) {
     $result = $gameWon ? 'Win' : 'Lose';
 
     // this block should only insert the score if it has nor already been inserte 
+    if (!isset($_SESSION['score_inserted'])) {
+        require_once './includes/library.php';
+        $pdo = connectdb();
+
+        $stmt = $pdo->prepare("
+            INSERT INTO cois3430_assn1_scores 
+            (username, difficulty, result, word, score, play_date)
+            VALUES (:username, :difficulty, :result, :word, :score, NOW())
+        ");
+        $stmt->execute([
+            ':username'   => $username,
+            ':difficulty' => $difficulty,
+            ':result'     => $result,
+            ':word'       => $word,
+            ':score'      => $score
+        ]);
+
+        $_SESSION['score_inserted'] = true;
+    }
 }
-
-
-
 
 ?>
 <main>
@@ -137,12 +153,7 @@ if ($wordGuessed || $remainingGuesses <= 0) {
         <?php endif; ?>
 
         <div id="game-over-options">
-            <a href="difficulty.php" onclick="<?php
-                // clear game session on play again
-                session_unset();
-                session_start();
-                $_SESSION['username'] = $username;
-            ?>">Play Again</a>
+            <a href="difficulty.php">Play Again</a> 
             <a href="scores.php">See Other Scores</a>
         </div>
 
