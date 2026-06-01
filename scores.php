@@ -151,8 +151,7 @@ $hardResults = $hardScores->fetchAll();
             </tbody>
         </table>
 
-        <a href="difficulty.php">Play Again</a>
-
+        <a href="difficulty.php" class="button-link">Play Again</a>
     </main>
     <footer>
         <p>Owen Cobbold 2026</p>
