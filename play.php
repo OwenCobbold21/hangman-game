@@ -55,8 +55,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['guessed_letters'] = str_split($word); // fixed  logic to increment full word guesses down only 1 instead of 2
             } else {
                 // wrong word guess - decrement 1 guess
-                $_SESSION['remaining_guesses'] -= 
-                    max(0, $_SESSION['remianing_guesses'] - 1); // Fixes an issue where fast entries resulted in a negative guess remaining count
+                $_SESSION['remaining_guesses'] = max(0, $_SESSION['remaining_guesses'] - 1); // Fixes an issue where fast entries resulted in a negative guess remaining count
             }
         } else {
             // single letter
@@ -64,7 +63,7 @@ if (isset($_POST['submit'])) {
 
             if (!str_contains($word, $guess)) {
                 // wrong letter - decrement remaining guesses by 1
-                $_SESSION['remaining_guesses'] -= 1;
+                $_SESSION['remaining_guesses'] = max(0, $_SESSION['remaining_guesses'] - 1); // Sane fix here
             }
         }
         // I think my code couldve been better here  but I don't wanna touch it now that its all working properly
@@ -168,8 +167,8 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
             </p>
         </div>
 
-        <?php if ($gameWon): ?>
-            <?php if ($gameOver): ?>
+        <?php if ($gameOver): ?>
+            <?php if ($gameWon): ?>
                 <h2 style="color: green">You Win!</h2>
                 <p>You scored <strong><?php echo $score; ?></strong> points!</p>
             <?php else: ?>
