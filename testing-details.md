@@ -89,7 +89,7 @@ Loki Link: [play.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-O
 
 ## scores.php
 
-Loki Link: [Live Version On Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-OwenCobbold21/scores.php)
+Loki Link: [scores.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-OwenCobbold21/scores.php)
 
 ### ALL Scores Tables
 
