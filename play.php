@@ -35,6 +35,10 @@ $wordGuessed = !in_array('_', $wordDisplay);
 if (isset($_POST['submit'])) {
     $guess = strtoupper(trim($_POST['guess'] ?? ''));
 
+    if ($remainingGuesses <= 0 || $wordGuessed) {
+        header("Location: play.php");
+        exit;
+    }
     // validation using regular expression 
     if (empty($guess)) {
         $errors['guess'] = "Please enter a guess.";
