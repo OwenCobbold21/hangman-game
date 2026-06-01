@@ -164,7 +164,7 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
         </div>
 
         <?php if ($gameWon): ?>
-            <?php if ($gameWon): ?>
+            <?php if ($gameOver): ?>
                 <h2 style="color: green">You Win!</h2>
                 <p>You scored <strong><?php echo $score; ?></strong> points!</p>
             <?php else: ?>
