@@ -55,7 +55,8 @@ if (isset($_POST['submit'])) {
                 $_SESSION['guessed_letters'] = str_split($word); // fixed  logic to increment full word guesses down only 1 instead of 2
             } else {
                 // wrong word guess - decrement 1 guess
-                $_SESSION['remaining_guesses'] -= 1;
+                $_SESSION['remaining_guesses'] -= 
+                    max(0, $_SESSION['remianing_guesses'] - 1); // Fixes an issue where fast entries resulted in a negative guess remaining count
             }
         } else {
             // single letter
