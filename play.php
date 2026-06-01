@@ -98,7 +98,7 @@ $gameWon = false;
 $score = 0;
 $result = '';
 
-if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
+if ($wordGuessed || $remainingGuesses <= 0) { // game losing logic safehaurd, prevents the error I was getting of being able to submit a guess after game was over
     $gameOver = true;
     $gameWon = $wordGuessed; // game winning logic
 
