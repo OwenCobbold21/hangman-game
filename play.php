@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
     if (empty($guess)) {
         $errors['guess'] = "Please enter a guess.";
     } elseif (!preg_match('/^[A-Z]+$/', $guess)) { // check for non-apporpriate characters in the guess
+        $errors['guess'] = "Your guess can only contain letters.";
     } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) {
-        $errors['guess'] = "Your guess can only contain letters."; 
         $errors['guess'] = "You already guessed that letter."; // make sure no reguessing is possible
     } else {
 
@@ -164,19 +164,18 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
         </div>
 
         <?php if ($gameWon): ?>
-            <h2 style="color: green">You Win!</h2>
-            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
-        <?php else: ?>
-            <h2 style="color: red">Game Over!</h2>
-            <p>The word was: <strong><?php echo $word; ?></strong></p>
-            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
-        <?php endif; ?>
-
+            <?php if ($gameWon): ?>
+                <h2 style="color: green">You Win!</h2>
+                <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+            <?php else: ?>
+                <h2 style="color: red">Game Over!</h2>
+                <p>The word was: <strong><?php echo $word; ?></strong></p>
+                <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+            <?php endif; ?>
             <div id="game-over-options">
                 <a href="difficulty.php">Play Again</a>
                 <a href="scores.php">See Other Scores</a>
             </div>
-
         <?php else: ?>
             <form method="post" novalidate>
                 <div class="form-item">

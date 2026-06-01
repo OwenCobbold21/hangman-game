@@ -75,7 +75,13 @@ button {
 #word-display {
     display: flex;
     gap: 0.75rem;
-    margin: 1.25rem 0;
+    margin: 2rem 0; 
+}
+
+#game-info {
+    border-bottom: 0.25rem solid #f0f0f0;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .letter {
