@@ -8,19 +8,19 @@ Loki Link: [start.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-
 
 ### Empty Username Error
 
-![Empty username error](empty-username.png)
+![Empty username error](/3430/assn/assn1-OwenCobbold21/testing-screenshots/empty-username.png)
 
 ### Invalid Character Error
 
-![Invalid character error](invalid-username.png)
+![Invalid character error](/3430/assn/assn1-OwenCobbold21/testing-screenshots/invalid-username.png)
 
 ### Successful Redirect
 
-![Successful redirect](valid_username.png)
+![Successful redirect](/3430/assn/assn1-OwenCobbold21/testing-screenshots/valid_username.png)
 
 ### HTML start Validation
 
-![HTML validation](validation-start.png)
+![HTML validation](/3430/assn/assn1-OwenCobbold21/testing-screenshots/validation-start.png)
 
 ## difficulty.php
 
@@ -28,23 +28,23 @@ Loki Link: [difficulty.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/a
 
 ### No Difficulty Selected Error
 
-![No difficulty selected](no-difficulty.png)
+![No difficulty selected](/3430/assn/assn1-OwenCobbold21/testing-screenshots/no-difficulty.png)
 
 ### Easy Selected
 
-![Easy difficulty selected](easy-selected.png)
+![Easy difficulty selected](/3430/assn/assn1-OwenCobbold21/testing-screenshots/easy-selected.png)
 
 ### Medium Selected
 
-![Medium difficulty selected](medium-selected.png)
+![Medium difficulty selected](/3430/assn/assn1-OwenCobbold21/testing-screenshots/medium-selected.png)
 
 ### Hard Selected
 
-![Hard difficulty selected](hard-selected.png)
+![Hard difficulty selected](/3430/assn/assn1-OwenCobbold21/testing-screenshots/hard-selected.png)
 
 ### HTML difficulty Validation
 
-![HTML validation](validation-difficulty.png)
+![HTML validation](/3430/assn/assn1-OwenCobbold21/testing-screenshots/validation-difficulty.png)
 
 ## play.php
 
@@ -52,32 +52,32 @@ Loki Link: [play.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-O
 
 ### Empty Guess Error
 
-![Empty guess error](empty_guess.png)
+![Empty guess error](/3430/assn/assn1-OwenCobbold21/testing-screenshots/empty_guess.png)
 
 ### Invalid Guess Error
 
-![Invalid guess error](invalid_guess.png)
+![Invalid guess error](/3430/assn/assn1-OwenCobbold21/testing-screenshots/invalid_guess.png)
 
 ### Correct Letter Guess
 
-![Correct letter guess](correct_letter.png)
+![Correct letter guess](/3430/assn/assn1-OwenCobbold21/testing-screenshots/correct_letter.png)
 
 ### Wrong Letter Guess
 
-![Wrong letter guess](wrong_letter.png)
+![Wrong letter guess](/3430/assn/assn1-OwenCobbold21/testing-screenshots/wrong_letter.png)
 
 ### Repeated Letter  Guess
 
-![Repeated letter guess](repeated_letter.png)
+![Repeated letter guess](/3430/assn/assn1-OwenCobbold21/testing-screenshots/repeated_letter.png)
 
 ### Win Screen
 
-![Win screen](win_screen.png)
-![Win Screen 2](win_screen_hardmode.png)
+![Win screen](/3430/assn/assn1-OwenCobbold21/testing-screenshots/win_screen.png)
+![Win Screen 2](/3430/assn/assn1-OwenCobbold21/testing-screenshots/win_screen_hardmode.png)
 
 ### Game Over Screen
 
-![Game over screen](game_over.png)
+![Game over screen](/3430/assn/assn1-OwenCobbold21/testing-screenshots/game_over.png)
 
 ### Play Again
 
@@ -85,7 +85,7 @@ Loki Link: [play.php Loki](https://loki.trentu.ca/~owencobbold/3430/assn/assn1-O
 
 ### HTML Validation
 
-![HTML validation](validation-play.png)
+![HTML validation](/3430/assn/assn1-OwenCobbold21/testing-screenshots/validation-play.png)
 
 ## scores.php
 
@@ -93,12 +93,12 @@ Loki Link: [Live Version On Loki](https://loki.trentu.ca/~owencobbold/3430/assn/
 
 ### ALL Scores Tables
 
-![Scores page](scores_tables.png)
+![Scores page](/3430/assn/assn1-OwenCobbold21/testing-screenshots/scores_tables.png)
 
 ### Multiple Users Score Tables
 
-![Scores page + more users](scores_more_users.png)
+![Scores page + more users](/3430/assn/assn1-OwenCobbold21/testing-screenshots/scores_more_users.png)
 
 ### HTML scores Validation
 
-![HTML validation](validation-scores.png)
+![HTML validation](/3430/assn/assn1-OwenCobbold21/testing-screenshots/validation-scores.png)
