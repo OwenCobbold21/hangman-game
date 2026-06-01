@@ -39,10 +39,10 @@ label {
     font-weight: bold;
 }
 
-input[type="text"], 
+input[type="text"],
 input[type="password"] {
     padding: 0.5rem;
-    border: 0.25rem solid #ccc;
+    border: 0.1rem solid #ccc;
     border-radius: 0.25rem;
     width: 100%;
     max-width: 25rem;
@@ -59,7 +59,8 @@ button {
 }
 
 .error {
-    color: red;
+    color: #c0392b;
+    font-weight: bold;
 }
 
 .form-item {
@@ -74,15 +75,15 @@ button {
 
 #word-display {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.75rem;
-    margin: 2rem 0; 
+    margin: 2rem 0;
 }
 
 #game-info {
     border-bottom: 0.25rem solid #f0f0f0;
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
-}
+    margin-bottom: 0.5rem;}
 
 .letter {
     font-size: 2rem;
@@ -104,6 +105,11 @@ button {
     padding: 0.75rem 1.25rem;
     border-radius: 0.25rem;
     text-decoration: none;
+}
+
+button:hover,
+#game-over-options a:hover {
+    background-color: #34495e;
 }
 
 table {
