@@ -1,4 +1,3 @@
-
 <?php
 // Owen Cobbold - 0895910
 
@@ -9,7 +8,7 @@ unset($_SESSION['word']);
 unset($_SESSION['difficulty']);
 unset($_SESSION['guessed_letters']);
 unset($_SESSION['remaining_guesses']);
-unset($_SESSION['score_inserted']); 
+unset($_SESSION['score_inserted']);
 // fix play again problems 
 
 // if no username in session send them back to start
@@ -19,10 +18,12 @@ if (!isset($_SESSION['username'])) {
 }
 
 // declare errors array and difficulty variable
-$difficulty = $_POST['difficulty'] ?? '';
+$difficulty = '';
 $errors = [];
 
 if (isset($_POST['submit'])) {
+    // only get difficulty from post when form is submitted
+    $difficulty = $_POST['difficulty'] ?? '';
 
     // validate difficulty is selected
     if (empty($difficulty)) {
@@ -58,6 +59,7 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +76,7 @@ if (isset($_POST['submit'])) {
         <h2>Select Difficulty</h2>
         <form method="post" novalidate>
             <div class="form-item">
-                <span class="error <?php echo !empty($errors) && isset($errors['difficulty']) ? '' : 'hidden'; ?>">
+                <span class="error <?php echo isset($errors['difficulty']) ? '' : 'hidden'; ?>">
                     Please select a difficulty level.
                 </span>
             </div>
@@ -97,7 +99,7 @@ if (isset($_POST['submit'])) {
         </form>
     </main>
     <footer>
-        <p>&copy; Owen Cobbold 2026</p>
+        <p>Owen Cobbold 2026</p>
     </footer>
 </body>
 

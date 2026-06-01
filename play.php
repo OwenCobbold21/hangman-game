@@ -197,7 +197,7 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game losing logic safehaurd, pr
 
     </main>
     <footer>
-        <p>&copy; Owen Cobbold 2026</p>
+        <p>Owen Cobbold 2026</p>
     </footer>
 </body>
 

@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
         </form>
     </main>
     <footer>
-        <p>&copy; Owen Cobbold 2026</p>
+        <p>Owen Cobbold 2026</p>
     </footer>
 </body>
 
