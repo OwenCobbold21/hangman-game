@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// if no username or word is in the session send them back to login
+// if no username or word is in the session  should take them back to login
 if (!isset($_SESSION['username']) || !isset($_SESSION['word'])) {
     header("Location: start.php");
     exit;
 }
 
-// pull game data from current session into variables for easy use
+// pull game data from current session into its own variables for easy play and readability
 $word = $_SESSION['word'];
 $difficulty = $_SESSION['difficulty'];
 $guessedLetters = $_SESSION['guessed_letters'];
@@ -19,7 +19,7 @@ $errors = [];
 $wordDisplay = [];
 $lettersRevealed = 0;
 
-
+// Iterate through the users word guess, if the letter has been guessed, show if not show a blank (underscore)
 foreach (str_split($word) as $letter) {
     if (in_array($letter, $guessedLetters)) {
         $wordDisplay[] = $letter;
@@ -38,9 +38,9 @@ if (isset($_POST['submit'])) {
     // validation using regular expression 
     if (empty($guess)) {
         $errors['guess'] = "Please enter a guess.";
-    } elseif (!preg_match('/^[A-Z]+$/', $guess)) {
-        $errors['guess'] = "Your guess can only contain letters."; // check for non-apporpriate characters
+    } elseif (!preg_match('/^[A-Z]+$/', $guess)) { // check for non-apporpriate characters in the guess
     } elseif (strlen($guess) === 1 && in_array($guess, $guessedLetters)) {
+        $errors['guess'] = "Your guess can only contain letters."; 
         $errors['guess'] = "You already guessed that letter."; // make sure no reguessing is possible
     } else {
 
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
                 // correct word guess - reveal all letters
                 $_SESSION['guessed_letters'] = str_split($word); // fixed  logic to increment full word guesses down only 1 instead of 2
             } else {
-                // wrong word guess - minus 1 guesses
+                // wrong word guess - decrement 1 guess
                 $_SESSION['remaining_guesses'] -= 1;
             }
         } else {
@@ -62,8 +62,8 @@ if (isset($_POST['submit'])) {
                 $_SESSION['remaining_guesses'] -= 1;
             }
         }
-
         // I think my code couldve been better here  but I don't wanna touch it now that its all working properly
+
         // redirect to refresh page with the updated session
         header("Location: play.php");
         exit;
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
     $guessedLetters = $_SESSION['guessed_letters'];
     $remainingGuesses = $_SESSION['remaining_guesses'];
 
-    // rebuild word display after guess
+    // rebuild the word display after guess
     $wordDisplay = [];
     $lettersRevealed = 0;
     foreach (str_split($word) as $letter) {
@@ -84,9 +84,11 @@ if (isset($_POST['submit'])) {
             $wordDisplay[] = '_';
         }
     }
+    // check if word is fully revealed
     $wordGuessed = !in_array('_', $wordDisplay);
 }
 
+// game state variables
 $gameOver = false;
 $gameWon = false;
 $score = 0;
@@ -96,9 +98,11 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
     $gameOver = true;
     $gameWon = $wordGuessed; // game winning logic
 
-    // calculate the score
+    // count how many letters have been revealed (not blank)
     $lettersRevealed = count(array_filter($wordDisplay, fn($l) => $l !== '_'));
+    // calculate score: letters revealed x 5 + remaining guesses x 10 + 15 bonus if win
     $score = ($lettersRevealed * 5) + ($remainingGuesses * 10) + ($gameWon ? 15 : 0);
+    // ternary that sets the result to Win or Lose based on whether the word was guessed
     $result = $gameWon ? 'Win' : 'Lose';
 
     // only insert score if not already inserted
@@ -119,7 +123,7 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
             ':score'      => $score
         ]);
 
-        $_SESSION['score_inserted'] = true;
+        $_SESSION['score_inserted'] = true; // Prevents duplicate score inserts
     }
 }
 ?>

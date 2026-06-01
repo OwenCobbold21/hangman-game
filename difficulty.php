@@ -1,4 +1,7 @@
+
 <?php
+// Owen Cobbold - 0895910
+
 session_start();
 
 // clear game session data when starting a new game
@@ -6,7 +9,8 @@ unset($_SESSION['word']);
 unset($_SESSION['difficulty']);
 unset($_SESSION['guessed_letters']);
 unset($_SESSION['remaining_guesses']);
-unset($_SESSION['score_inserted']); // fix play again problems
+unset($_SESSION['score_inserted']); 
+// fix play again problems 
 
 // if no username in session send them back to start
 if (!isset($_SESSION['username'])) {
@@ -14,6 +18,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
+// declare errors array and difficulty variable
 $difficulty = $_POST['difficulty'] ?? '';
 $errors = [];
 
@@ -36,7 +41,7 @@ if (isset($_POST['submit'])) {
             ORDER BY RAND()
             LIMIT 1
         ");
-        $stmt->execute([':difficulty' => $difficulty]);
+        $stmt->execute([':difficulty' => $difficulty]); // excecute and fetch result
         $result = $stmt->fetch();
 
         // store game data in the session

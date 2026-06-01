@@ -1,6 +1,6 @@
 # Assignment 1 Testing File
 
-Name(s): Owen Cobbold
+Name: Owen Cobbold
 
 ## start.php
 

@@ -1,4 +1,7 @@
+
 <?php
+// Owen Cobbold - 0895910
+
 session_start();
 
 $username = $_POST['username'] ?? '';
@@ -12,7 +15,7 @@ if (isset($_POST['submit'])) {
         $errors['username'] = true;
         $errorMessage = "Please enter a username.";
 
-        // check if username valid characters, only letters, numbers, underscores
+        // check if username contains valid characters, only letters, numbers, underscores
     } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
         $errors['username'] = true;
         $errorMessage = "Username can only contain letters, numbers, and underscores.";

@@ -1,4 +1,6 @@
 <?php
+// Owen Cobbold - 0895910
+
 session_start();
 
 // if no username is in session send them back to start
@@ -8,9 +10,9 @@ if (!isset($_SESSION['username'])) {
 }
 
 require_once './includes/library.php';
-$pdo = connectdb();
+$pdo = connectdb(); // create connection 
 
-// prepare the 10 most recent scores for each difficulty
+// prepare the 10 most recent scores for each difficulty with db query
 $easyScores = $pdo->prepare("
     SELECT username, result, word, score, play_date
     FROM cois3430_assn1_scores
@@ -19,16 +21,16 @@ $easyScores = $pdo->prepare("
     LIMIT 10
 ");
 $easyScores->execute();
-$easyResults = $easyScores->fetchAll();
+$easyResults = $easyScores->fetchAll(); // excecute and fetch scores and results 
 
-$mediumScores = $pdo->prepare("
+$mediumScores = $pdo->prepare(" 
     SELECT username, result, word, score, play_date
     FROM cois3430_assn1_scores
     WHERE difficulty = 'Medium'
     ORDER BY play_date DESC
     LIMIT 10
 ");
-$mediumScores->execute();
+$mediumScores->execute(); // same for medium with the Medium difficulty table
 $mediumResults = $mediumScores->fetchAll();
 
 $hardScores = $pdo->prepare("
@@ -38,10 +40,9 @@ $hardScores = $pdo->prepare("
     ORDER BY play_date DESC
     LIMIT 10
 ");
-$hardScores->execute();
+$hardScores->execute(); // same for hard with the Hard difficulty table selected
 $hardResults = $hardScores->fetchAll();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
