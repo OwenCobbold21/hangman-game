@@ -102,5 +102,3 @@ Loki Link: [Live Version On Loki](https://loki.trentu.ca/~owencobbold/3430/assn/
 ### HTML scores Validation
 
 ![HTML validation](validation-scores.png)
-
-

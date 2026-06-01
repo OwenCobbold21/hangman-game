@@ -22,14 +22,104 @@ header {
 }
 
 main {
-    max-width: 45rem;
+    max-width: 44rem;
     margin: 2rem auto;
     padding: 1.25rem;
     background-color: white;
     border-radius: 0.5rem;
 }
 
-h2, h3 {
+h2,
+h3 {
     color: #2c3e50;
     margin-bottom: 1rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="password"] {
+    padding: 0.5rem;
+    border: 0.25rem solid #ccc;
+    border-radius: 0.25rem;
+    width: 100%;
+    max-width: 25rem;
+}
+
+button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-top: 0.75rem;
+}
+
+.error {
+    color: red;
+}
+
+.form-item {
+    margin-bottom: 1rem;
+}
+
+.form-item.row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#word-display {
+    display: flex;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+}
+
+.letter {
+    font-size: 2rem;
+    font-weight: bold;
+    border-bottom: 0.25rem solid #2c3e50;
+    min-width: 2rem;
+    text-align: center;
+}
+
+#game-over-options {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+#game-over-options a {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+td {
+    padding: 0.75rem;
+    border-bottom: 0.25rem solid #ddd;
+}
+
+footer {
+    text-align: center;
+    padding: 1.25rem;
+    color: #666;
 }

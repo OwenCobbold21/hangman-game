@@ -163,15 +163,14 @@ if ($wordGuessed || $remainingGuesses <= 0) { // game loosing logic
             </p>
         </div>
 
-        <?php if ($gameOver): ?>
-            <?php if ($gameWon): ?>
-                <h2>You Win!</h2>
-                <p>You scored <strong><?php echo $score; ?></strong> points!</p>
-            <?php else: ?>
-                <h2>Game Over!</h2>
-                <p>The word was: <strong><?php echo $word; ?></strong></p>
-                <p>You scored <strong><?php echo $score; ?></strong> points!</p>
-            <?php endif; ?>
+        <?php if ($gameWon): ?>
+            <h2 style="color: green">You Win!</h2>
+            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+        <?php else: ?>
+            <h2 style="color: red">Game Over!</h2>
+            <p>The word was: <strong><?php echo $word; ?></strong></p>
+            <p>You scored <strong><?php echo $score; ?></strong> points!</p>
+        <?php endif; ?>
 
             <div id="game-over-options">
                 <a href="difficulty.php">Play Again</a>
