@@ -1,21 +1,21 @@
-# 🎮 Full-Stack PHP Hangman Web Application
+# Full-Stack PHP Hangman Web Application
 
-A dynamic, session-state-driven Hangman game built from scratch using PHP and a MySQL database backend. This application showcases clean backend architectural logic, secure data tracking, robust server-side form validation, and relational database management—all without relying on external libraries or client-side JavaScript.
+A dynamic, session-state-driven Hangman game built from scratch using PHP and a MySQL database backend. This application showcases clean backend architectural logic, secure data tracking, robust server-side form validation, and relational database management,
 
 ---
 
-## 🚀 Key Features & Architectural Highlights
+## Key Features & Architectural Highlights
 
 *   **Dynamic Session Management:** Leverages PHP state handling to maintain user profiles, track active games, and handle letter-guessing mechanics securely across multiple page loads.
 *   **Relational Database Backend:** Utilizes a custom MySQL architecture consisting of a pre-populated algorithmic word bank segmented by difficulty tier and a persistent scoring table tracking real-time match analytics.
 *   **Advanced Game Logic & Ruleset Evaluation:** 
-    *   Dual-input validation supporting both single-letter guesses and high-risk full-word guesses (with custom guess deductions).
+    *   Dual-input validation supporting both single-letter guesses and high-risk full-word guesses.
     *   Automated algorithmic dynamic scoring: `Score = (Letters Revealed × 5) + (Remaining Guesses × 10) + (15 Win Bonus)`.
 *   **Server-Side Security & Data Validation:** Features strict PHP input sanitization ensuring no numbers/symbols are accepted, while executing standard raw secure connection best practices to avoid hardcoded credentials.
 
 ---
 
-## 📊 Database Schema Design
+## Database Schema Design
 
 The data layers are cleanly isolated across two critical relational tables managed through SQL queries:
 
@@ -45,7 +45,7 @@ The application is structured linearly across modular, single-responsibility tem
 
 ---
 
-## 💻 Tech Stack & Constraints
+## Tech Stack & Constraints
 
 *   **Backend:** PHP 8.x
 *   **Database:** MySQL
